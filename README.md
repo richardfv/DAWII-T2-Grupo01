@@ -4,9 +4,9 @@
 **Grupo:** Grupo 01  
 
 ### Integrantes:
-- Richard Falcon Vera - I202414402
-- Ronal Alexander Martinez Gutierrez - I202121597
-- Walter Brian Pfeiffer Zegarra - I202418337
+- Richard Falcon Vera - I202414402 (Backend Developer)
+- Walter Brian Pfeiffer Zegarra - I202418337 (Backend Developer)
+- Ronal Alexander Martinez Gutierrez - I202121597 (QA / Software Tester)
 
 ### Microservicios del Proyecto
 - `eureka-server`: Servidor de descubrimiento (Puerto 8761)
