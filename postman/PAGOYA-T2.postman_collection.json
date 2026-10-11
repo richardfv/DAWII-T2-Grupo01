@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "b3e945c2-12a4-4f88-912b-7b56e6d19a41",
+		"name": "PAGOYA-Peru-Fintech",
+		"description": "Coleccion de pruebas para los microservicios de PAGOYA Peru - Fintech Tarjetas Prepago",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01. Eureka Server",
+			"item": [
+				{
+					"name": "Eureka Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8761",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8761"
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "02. MS Reclamos (Puerto 8081)",
+			"item": [
+				{
+					"name": "Listar Todos los Reclamos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/reclamos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"reclamos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Reclamo (POST)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numreclamo\": \"REC-003\",\n  \"fechareclamo\": \"2026-10-10\",\n  \"nomcliente\": \"Lucia Fernandez\",\n  \"ultimos4tarjeta\": \"9874\",\n  \"motivo\": \"Cargo desconocido por suscripcion online\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/reclamos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"reclamos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Reclamo por Numero (GET)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/reclamos/REC-001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"reclamos",
+								"REC-001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Reclamo (PUT)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"analista\": \"Roberto Gomez\",\n  \"estado\": 2,\n  \"observacion\": \"Reclamo procedente. Se realiza la devolucion.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/reclamos/REC-001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"reclamos",
+								"REC-001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "03. MS Resolucion (Puerto 8082)",
+			"item": [
+				{
+					"name": "Evaluar Reclamo - Procedente (Estado 2)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numreclamo\": \"REC-001\",\n  \"analista\": \"Maria Lopez\",\n  \"estado\": 2,\n  \"observacion\": \"Reclamo procedente. Se realiza la devolucion.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/resolucion/evaluar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"resolucion",
+								"evaluar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evaluar Reclamo - Improcedente (Estado 3)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numreclamo\": \"REC-002\",\n  \"analista\": \"Carlos Mendoza\",\n  \"estado\": 3,\n  \"observacion\": \"Reclamo improcedente. Se verifico que el consumo fue realizado con validacion biometrica.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/resolucion/evaluar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"resolucion",
+								"evaluar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evaluar Reclamo - Error 404 (No Existe)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numreclamo\": \"REC-999\",\n  \"analista\": \"Maria Lopez\",\n  \"estado\": 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/resolucion/evaluar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"resolucion",
+								"evaluar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
